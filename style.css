@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+  background-color: gray;
+  overflow: hidden;
+}
+body .sections {
+  background-color: gray;
+  min-width: 50px;
+  width: 5%;
+}
+body .works {
+  background-color: white;
+  min-width: 300px;
+  width: 25%;
+}
+body .tasks {
+  background-color: black;
+  min-width: 300px;
+  width: 70%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  scroll-behavior: smooth;
+  overflow-y: visible;
+}
+
+/*# sourceMappingURL=style.css.map */
