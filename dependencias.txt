@@ -1,0 +1,5 @@
+//dependencias
+npm i express morgan mongoose
+
+//dependencias de desarrollo
+npm i nodemon webpack webpack-cli react react-dom @babel/core babel-loader @babel/preset-react @babel/preset-env -D
