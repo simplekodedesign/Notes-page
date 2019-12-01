@@ -1,5 +1,5 @@
 //dependencias
-npm i express morgan mongoose jsonwebtoken bcryptjs
+npm i express morgan mongoose jsonwebtoken bcryptjs dotenv
 
 //dependencias de desarrollo
 npm i nodemon webpack webpack-cli react react-dom @babel/core babel-loader @babel/preset-react @babel/preset-env -D

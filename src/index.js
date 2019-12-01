@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname,"public")));
 //routes
 
 //login
-app.get("/",require("./routes/login.router"));
+app.use("/",require("./routes/login.router"));
 
 //arrancar servidor
 app.listen(app.get("port"),() => {

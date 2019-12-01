@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost/skd_notes",{
+//utilizar las variables de entorno
+require("dotenv").config();
+
+mongoose.connect(process.env.URL_DATABASE,{
 	useNewUrlParser: true,
 	useUnifiedTopology: true 
 })
