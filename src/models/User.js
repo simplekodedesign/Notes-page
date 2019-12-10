@@ -1,7 +1,7 @@
-const { Schema,model } = require("mongoose");
+const { Schema,model } = require("mongoose")
 
 //importar bcrypt
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs")
 
 //esquema de usuario
 const userSchema = new Schema({
@@ -11,14 +11,14 @@ const userSchema = new Schema({
 
 //encriptar contraseña
 userSchema.methods.encryptPassword = async (password) => {
-	const salt = await bcrypt.genSalt(10);
-	return bcrypt.hash(password,salt);
+	const salt = await bcrypt.genSalt(10)
+	return bcrypt.hash(password,salt)
 }
 
 //validar contraseña
 userSchema.methods.validatePassword = function(password){
-	return bcrypt.compare(password,this.password);
+	return bcrypt.compare(password,this.password)
 }
 
 //exportar esquema
-module.exports = model("User",userSchema);
+module.exports = model("User",userSchema)
