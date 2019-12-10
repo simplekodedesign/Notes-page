@@ -41,6 +41,36 @@ router.get("/",ensureToken,async (req,res) => {
 	res.json(tasks)
 })
 
+//modificar nota
+router.post("/update",ensureToken,async (req,res) => {
+	const {task_id,title,message} = req.body
+	const user_id = req.user_id
+	var date = new Date()
+
+	date = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear()
+
+	if(!task_id || !title || !message){
+		return res.sendStatus(401).json({
+			message: "Debe rellenar todos los campos"
+		})
+	}
+
+	await Task.update({_id: task_id},{title,message})
+
+	const tasks = await Task.find({user_id})
+
+	res.json(tasks)
+})
+
+//eliminar nota
+router.post("/delete",ensureToken,async (req,res) => {
+	const {task_id} = req.body
+	const user_id = req.user_id
+	await Task.remove({_id: task_id})
+	const tasks = await Task.find({user_id})
+	res.json(tasks)
+})
+
 //asegurarse que el token esta creado
 function ensureToken(req,res,next){
 	//revisar si la cabecera autorization existe

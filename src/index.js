@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname,"public")))
 app.use("/login",require("./routes/login.router"))
 
 //tasks
-app.use("/task",require("./routes/task.router"))
+app.use("/tasks",require("./routes/task.router"))
 
 //arrancar servidor
 app.listen(app.get("port"),() => {
