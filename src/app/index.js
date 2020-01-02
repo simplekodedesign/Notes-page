@@ -1,12 +1,5 @@
-import React,{ Component } from "react";
-import { render } from "react-dom";
+import React,{ Component } from "react"
+import { render } from "react-dom"
+import App from "./components/app"
 
-class App extends Component {
-	render(){
-		return(
-			<h1>Login SKD Notes</h1>
-		)
-	}
-}
-
-render(<App/>,document.getElementById("app"));
+render(<App/>,document.getElementById("app"))
