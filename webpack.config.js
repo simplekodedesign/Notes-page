@@ -1,7 +1,9 @@
+const path = require("path")
+
 module.exports = {
 	entry: "./src/app/index.js",
 	output: {
-		path: __dirname + "/src/public/js",
+		path: path.join(__dirname,"/src/public/js"),
 		filename: "bundle.js"
 	},
 	module: {
@@ -10,6 +12,9 @@ module.exports = {
 				use: "babel-loader",
 				test: /\.js$/,
 				exclude: /node_modules/
+			},{
+				use: ["style-loader","css-loader"],
+				test: /\.css$/
 			}
 		]
 	}
