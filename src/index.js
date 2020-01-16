@@ -28,6 +28,11 @@ app.use("/login",require("./routes/login.router"))
 //tasks
 app.use("/tasks",require("./routes/task.router"))
 
+//redirect
+app.get("*",(req,res) => {
+	res.sendFile(path.join(__dirname,"public/index.html"))
+})
+
 //arrancar servidor
 app.listen(app.get("port"),() => {
 	console.log("Server on port: "+app.get("port"))
