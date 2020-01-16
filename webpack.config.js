@@ -4,7 +4,8 @@ module.exports = {
 	entry: "./src/app/index.js",
 	output: {
 		path: path.join(__dirname,"/src/public/js"),
-		filename: "bundle.js"
+		filename: "bundle.js",
+		publicPath: "/"
 	},
 	module: {
 		rules: [
@@ -17,5 +18,8 @@ module.exports = {
 				test: /\.css$/
 			}
 		]
+	},
+	devServer: {
+		historyApiFallback: true
 	}
 }
