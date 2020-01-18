@@ -8,7 +8,7 @@ const LoginForm = () => {
 			<form autoComplete="off">
 				<input type="text" name="username" placeholder="Username"/>
 				<input type="text" name="password" placeholder="Password"/>
-				<input type="submit" value="LogIn"/>
+				<input type="submit" value="Log In"/>
 			</form>
 			<Link to="/signup">Sign Up</Link>	
 		</div>
