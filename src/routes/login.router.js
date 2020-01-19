@@ -12,29 +12,40 @@ const User = require("../models/User")
 
 //registro de usuario
 router.post("/signup",async (req,res) => {
-	const { email,password } = req.body
+	const { email,password,password_repeat } = req.body
 
-	if(!email || !password){
-		return res.sendStatus(401).json({
-			message: "Debe rellenar todos los campos"
+	if(password == password_repeat){
+		if(!email || !password || !password_repeat){
+			return res.json({
+				status: -1,
+				message: "Debe rellenar todos los campos"
+			})
+		}
+
+		//crear instancia de usuario
+		const user = new User({email,password})
+
+		//cifrar constraseña
+		user.password = await user.encryptPassword(user.password)
+
+		//guardar al usuario en db
+		await user.save()
+
+		//generar token
+		const token = jwt.sign({id: user._id},process.env.SECRET_KEY,{
+			expiresIn: 60 * 60 * 24
+		})
+
+		res.json({
+			auth: true, 
+			token
 		})
 	}
 
-	//crear instancia de usuario
-	const user = new User({email,password})
-
-	//cifrar constraseña
-	user.password = await user.encryptPassword(user.password)
-
-	//guardar al usuario en db
-	await user.save()
-
-	//generar token
-	const token = jwt.sign({id: user._id},process.env.SECRET_KEY,{
-		expiresIn: 60 * 60 * 24
+	res.json({
+		status: -2,
+		message: "Las contraseñas no coinciden"
 	})
-
-	res.json({auth: true, token})
 })
 
 //loguear usuario

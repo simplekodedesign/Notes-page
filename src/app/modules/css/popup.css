@@ -1,0 +1,27 @@
+.popup{
+	font-size: 0.8em;
+	position: absolute;
+	top: 15px;
+	left: 10px;
+	padding: 5px 15px;
+	background: rgba(255,255,255,.9);
+	box-shadow: 0 0 20px rgba(255,255,255,.3);
+	opacity: 0;
+	transform: translateY(-20px);
+	transition: all 250ms;
+}
+
+@media(min-width: 1024px){
+	.popup{
+		font-size: 1.2em;
+		position: absolute;
+		top: 10%;
+		left: 50%;
+		padding: 10px 35px;
+		background: rgba(255,255,255,.9);
+		box-shadow: 0 0 20px rgba(255,255,255,.3);
+		opacity: 0;
+		transform: translateY(-20px);
+		transition: all 250ms;
+	}
+}

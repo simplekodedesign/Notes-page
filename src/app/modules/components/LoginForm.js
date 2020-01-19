@@ -6,7 +6,7 @@ const LoginForm = () => {
 	return (
 		<div className="form_cont">
 			<form autoComplete="off">
-				<input type="text" name="username" placeholder="Username"/>
+				<input type="text" name="email" placeholder="Email"/>
 				<input type="text" name="password" placeholder="Password"/>
 				<input type="submit" value="Log In"/>
 			</form>
