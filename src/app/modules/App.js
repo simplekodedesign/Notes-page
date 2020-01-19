@@ -1,10 +1,15 @@
-import React from "react"
+import React,{useState} from "react"
 import {Switch,Route} from "react-router-dom"
 import Login from "./views/Login"
 import SignUp from "./views/SignUp"
 import Home from "./views/Home"
 
 const App = () => {
+
+	const [token,setToken] = useState({
+		token: ""
+	})
+
 	return(
 		<div>
 			<Switch>

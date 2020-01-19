@@ -4,7 +4,6 @@ import {Link} from "react-router-dom"
 import handlePopup from "./handlePopup" 
 
 const SignUpForm = () => {
-
 	//estableciendo estado
 	const [User,setUser] = useState({
 		email: "",
