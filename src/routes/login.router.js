@@ -14,38 +14,48 @@ const User = require("../models/User")
 router.post("/signup",async (req,res) => {
 	const { email,password,password_repeat } = req.body
 
-	if(password == password_repeat){
-		if(!email || !password || !password_repeat){
-			return res.json({
-				status: -1,
-				message: "Debe rellenar todos los campos"
-			})
-		}
-
-		//crear instancia de usuario
-		const user = new User({email,password})
-
-		//cifrar constraseña
-		user.password = await user.encryptPassword(user.password)
-
-		//guardar al usuario en db
-		await user.save()
-
-		//generar token
-		const token = jwt.sign({id: user._id},process.env.SECRET_KEY,{
-			expiresIn: 60 * 60 * 24
-		})
-
-		res.json({
-			auth: true, 
-			token
+	if(!email || !password || !password_repeat){
+		return res.json({
+			status: -1,
+			message: "Debe rellenar todos los campos"
 		})
 	}
 
-	res.json({
-		status: -2,
-		message: "Las contraseñas no coinciden"
-	})
+	if(password == password_repeat){
+		//buscar el nombre de usuario
+		const verify = await User.findOne({email})
+
+		if(!verify){
+			//crear instancia de usuario
+			const user = new User({email,password})
+
+			//cifrar constraseña
+			user.password = await user.encryptPassword(user.password)
+
+			//guardar al usuario en db
+			await user.save()
+
+			//generar token
+			const token = jwt.sign({id: user._id},process.env.SECRET_KEY,{
+				expiresIn: 60 * 60 * 24
+			})
+
+			return res.json({
+				status: 1, 
+				token
+			})
+		}else{
+			return res.json({
+				status: -3, 
+				message: "El correo electronico ya se encuentra registrado"
+			})
+		}
+	}else{
+		return res.json({
+			status: -2,
+			message: "Las contraseñas no coinciden"
+		})
+	}	
 })
 
 //loguear usuario
@@ -57,8 +67,9 @@ router.post("/",async (req,res) => {
 
 	//si no se encuentra al usuario
 	if(!user){
-		return res.sendStatus(404).json({
-			message: "Usuario no encontrado"
+		return res.json({
+			status: -1,
+			message: "El usuario no se encuentra registrado"
 		})
 	}
 
@@ -67,9 +78,9 @@ router.post("/",async (req,res) => {
 
 	//en caso de no ser correcta
 	if(!verify){
-		return res.sendStatus(401).json({
-			auth: false,
-			message: "La contraseña es incorrecta"
+		return res.json({
+			status: -2,
+			message: "Contraseña incorrecta"
 		})
 	}
 
@@ -79,7 +90,7 @@ router.post("/",async (req,res) => {
 	})
 
 	res.json({
-		auth: true,
+		status: 1,
 		token
 	})
 })

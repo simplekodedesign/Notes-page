@@ -38,10 +38,15 @@ const SignUpForm = () => {
 			if(resp.status != 1){
 				handlePopup(resp.message)
 			}else{
-				console.log(resp)
+				setUser({
+					email: "",
+					password: "",
+					password_repeat: ""
+				})
+				window.location = "/home"
 			}
 		})
-		.catch(err => console.log(err))
+		.catch(err => console.log(err))		
 	}
 
 	return (
