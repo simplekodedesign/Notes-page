@@ -4,7 +4,7 @@ import {Link} from "react-router-dom"
 import handlePopup from "./handlePopup" 
 
 const LoginForm = () => {
-
+	//estableciendo estado
 	const [User,setUser] = useState({
 		email: "",
 		password: ""
@@ -34,6 +34,7 @@ const LoginForm = () => {
 		.then(resp => resp.json())
 		.then(resp => {
 			if(resp.status != 1){
+				console.log(resp.message)
 				handlePopup(resp.message)
 			}else{
 				window.location = "/home"
@@ -53,7 +54,7 @@ const LoginForm = () => {
 				<input type="text" name="password" placeholder="Password" onChange={handleInputChange} value={User.password}/>
 				<input type="submit" value="Log In"/>
 			</form>
-			<Link to="/signup">Sign Up</Link>	
+			<Link to="/signup">Sign Up</Link>
 		</div>
 	)
 }

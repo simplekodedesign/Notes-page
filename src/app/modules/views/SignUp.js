@@ -1,6 +1,7 @@
 import React from "react"
 import SignUpForm from "../components/SignUpForm"
 import "../css/login.css"
+import "../css/popup.css"
 
 const SignUp = () => {
 	return(
