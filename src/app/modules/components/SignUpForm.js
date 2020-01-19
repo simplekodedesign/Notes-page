@@ -3,7 +3,7 @@ import {Link} from "react-router-dom"
 
 import handlePopup from "./handlePopup" 
 
-const SignUpForm = () => {
+const SignUpForm = (props) => {
 	//estableciendo estado
 	const [User,setUser] = useState({
 		email: "",
@@ -42,6 +42,7 @@ const SignUpForm = () => {
 					password: "",
 					password_repeat: ""
 				})
+				props.setToken("bearer" + resp.token)
 				window.location = "/home"
 			}
 		})

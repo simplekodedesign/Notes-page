@@ -3,13 +3,13 @@ import SignUpForm from "../components/SignUpForm"
 import "../css/login.css"
 import "../css/popup.css"
 
-const SignUp = () => {
+const SignUp = (props) => {
 	return(
 		<section>
 			<div className="img_cont">
 				<img src="img/SKDanimation.webp"/>
 			</div>
-			<SignUpForm/>
+			<SignUpForm setToken={props.setToken}/>
 		</section>
 	)
 }

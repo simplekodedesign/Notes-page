@@ -3,7 +3,7 @@ import {Link} from "react-router-dom"
 
 import handlePopup from "./handlePopup" 
 
-const LoginForm = () => {
+const LoginForm = (props) => {
 	//estableciendo estado
 	const [User,setUser] = useState({
 		email: "",
@@ -34,10 +34,10 @@ const LoginForm = () => {
 		.then(resp => resp.json())
 		.then(resp => {
 			if(resp.status != 1){
-				console.log(resp.message)
 				handlePopup(resp.message)
 			}else{
-				window.location = "/home"
+				props.setToken("bearer" + resp.token)
+				window.location = "/home"				
 			}
 			setUser({
 				email: "",
@@ -51,7 +51,7 @@ const LoginForm = () => {
 		<div className="form_cont">
 			<form onSubmit={handleSubmit} autoComplete="off">
 				<input type="text" name="email" placeholder="Email" onChange={handleInputChange} value={User.email}/>
-				<input type="text" name="password" placeholder="Password" onChange={handleInputChange} value={User.password}/>
+				<input type="password" name="password" placeholder="Password" onChange={handleInputChange} value={User.password}/>
 				<input type="submit" value="Log In"/>
 			</form>
 			<Link to="/signup">Sign Up</Link>

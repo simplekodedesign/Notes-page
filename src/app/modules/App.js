@@ -6,16 +6,20 @@ import Home from "./views/Home"
 
 const App = () => {
 
-	const [token,setToken] = useState({
-		token: ""
-	})
+	const [token,setToken] = useState("")
 
 	return(
 		<div>
 			<Switch>
-				<Route exact path="/" component={Login}/>
-				<Route path="/signup" component={SignUp}/>
-				<Route path="/home" component={Home}/>
+				<Route exact path="/">
+					<Login setToken={setToken}/>
+				</Route>
+				<Route path="/signup">
+					<SignUp setToken={setToken}/>
+				</Route>
+				<Route path="/home">
+					<Home token={token}/>
+				</Route>
 			</Switch>
 		</div>
 	)
