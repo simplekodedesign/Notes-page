@@ -62,13 +62,19 @@ router.post("/signup",async (req,res) => {
 router.post("/",async (req,res) => {
 	const {email,password} = req.body
 
+	if(!email || !password)
+		return res.json({
+			status: -1,
+			message: "Debe Rellenar todos los campos"
+		})
+
 	//buscar al usuario
 	const user = await User.findOne({email})
 
 	//si no se encuentra al usuario
 	if(!user){
 		return res.json({
-			status: -1,
+			status: -2,
 			message: "El usuario no se encuentra registrado"
 		})
 	}
@@ -79,7 +85,7 @@ router.post("/",async (req,res) => {
 	//en caso de no ser correcta
 	if(!verify){
 		return res.json({
-			status: -2,
+			status: -3,
 			message: "Contraseña incorrecta"
 		})
 	}
