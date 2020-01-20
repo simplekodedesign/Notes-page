@@ -2,7 +2,6 @@ import React,{useState} from "react"
 import {Link, Redirect} from "react-router-dom"
 
 import handlePopup from "./handlePopup" 
-import { set } from "mongoose"
 
 const LoginForm = (props) => {
 	//estableciendo estado
