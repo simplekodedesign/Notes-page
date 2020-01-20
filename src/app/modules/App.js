@@ -1,18 +1,22 @@
-import React,{useState} from "react"
-import {Switch,Route} from "react-router-dom"
+import React,{useState, useEffect} from "react"
+import {Switch,Route, Redirect} from "react-router-dom"
 import Login from "./views/Login"
 import SignUp from "./views/SignUp"
 import Home from "./views/Home"
 
 const App = () => {
 
-	const [token,setToken] = useState("")
+	const [token, setToken] = useState()
+
+	function changeToken (data) {
+		setToken(data)
+	}
 
 	return(
 		<div>
 			<Switch>
 				<Route exact path="/">
-					<Login setToken={setToken}/>
+					<Login setToken={changeToken}/>
 				</Route>
 				<Route path="/signup">
 					<SignUp setToken={setToken}/>

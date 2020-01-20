@@ -4,8 +4,8 @@ import Main from "../components/Main"
 
 
 const Home = (props) => {
-
-	console.log(props.token)
+	console.log("Token:")
+	console.log(props)
 
 	return (
 		<div>

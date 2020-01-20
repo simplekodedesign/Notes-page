@@ -1,7 +1,8 @@
 import React,{useState} from "react"
-import {Link} from "react-router-dom"
+import {Link, Redirect} from "react-router-dom"
 
 import handlePopup from "./handlePopup" 
+import { set } from "mongoose"
 
 const LoginForm = (props) => {
 	//estableciendo estado
@@ -9,6 +10,8 @@ const LoginForm = (props) => {
 		email: "",
 		password: ""
 	})
+
+	const [dir, setDir] = useState()
 
 	//controlar los inputs
 	function handleInputChange(e){
@@ -37,13 +40,14 @@ const LoginForm = (props) => {
 				handlePopup(resp.message)
 			}else{
 				props.setToken("bearer" + resp.token)
-				window.location = "/home"				
+				// window.location = "/home"
 			}
 			setUser({
 				email: "",
 				password: ""
 			})
 		})
+		.then(() => setDir(<Redirect to="/Home" />))
 		.catch(err => console.log(err))
 	}
 
@@ -55,6 +59,8 @@ const LoginForm = (props) => {
 				<input type="submit" value="Log In"/>
 			</form>
 			<Link to="/signup">Sign Up</Link>
+			<Link to="/Home">Home</Link>
+			{dir}
 		</div>
 	)
 }
