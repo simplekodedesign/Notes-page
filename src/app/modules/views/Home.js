@@ -1,17 +1,13 @@
-import React,{useEffect} from "react"
+import React from "react"
 import Header from "../components/Header"
 import Main from "../components/Main"
 
 
 const Home = (props) => {
-	console.log("Token:")
-	console.log(props)
-
 	return (
 		<div>
 			<Header/>
-			<Main/>
-			<p>{props.token}</p>
+			<Main token={props.token} />
 		</div>		
 	)
 }

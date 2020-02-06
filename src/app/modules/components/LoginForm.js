@@ -10,6 +10,7 @@ const LoginForm = (props) => {
 		password: ""
 	})
 
+	//Controlar Redireccionamiento
 	const [dir, setDir] = useState()
 
 	//controlar los inputs
@@ -38,15 +39,14 @@ const LoginForm = (props) => {
 			if(resp.status != 1){
 				handlePopup(resp.message)
 			}else{
-				props.setToken("bearer" + resp.token)
-				// window.location = "/home"
+				props.setToken("bearer " + resp.token)
+				setDir(<Redirect to="/Home" />)
 			}
 			setUser({
 				email: "",
 				password: ""
 			})
 		})
-		.then(() => setDir(<Redirect to="/Home" />))
 		.catch(err => console.log(err))
 	}
 
@@ -58,7 +58,6 @@ const LoginForm = (props) => {
 				<input type="submit" value="Log In"/>
 			</form>
 			<Link to="/signup">Sign Up</Link>
-			<Link to="/Home">Home</Link>
 			{dir}
 		</div>
 	)

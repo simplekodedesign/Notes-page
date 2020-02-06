@@ -19,10 +19,11 @@ const App = () => {
 					<Login setToken={changeToken}/>
 				</Route>
 				<Route path="/signup">
-					<SignUp setToken={setToken}/>
+					<SignUp setToken={changeToken}/>
 				</Route>
 				<Route path="/home">
-					<Home token={token}/>
+					<Home token={token}
+							setToken={changeToken}/>
 				</Route>
 			</Switch>
 		</div>

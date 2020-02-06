@@ -1,5 +1,5 @@
 import React,{useState} from "react"
-import {Link} from "react-router-dom"
+import {Link, Redirect} from "react-router-dom"
 
 import handlePopup from "./handlePopup" 
 
@@ -10,6 +10,9 @@ const SignUpForm = (props) => {
 		password: "",
 		password_repeat: ""
 	})
+
+	//Controlar Redireccionamiento
+	const [dir, setDir] = useState()
 
 	//controlar los inputs del formulario
 	function handleInputChange(e){
@@ -37,14 +40,14 @@ const SignUpForm = (props) => {
 			if(resp.status != 1){
 				handlePopup(resp.message)
 			}else{
-				setUser({
-					email: "",
-					password: "",
-					password_repeat: ""
-				})
-				props.setToken("bearer" + resp.token)
-				window.location = "/home"
+				props.setToken("bearer " + resp.token)
+				setDir(<Redirect to="/Home" />)
 			}
+			setUser({
+				email: "",
+				password: "",
+				password_repeat: ""
+			})
 		})
 		.catch(err => console.log(err))		
 	}
@@ -58,6 +61,7 @@ const SignUpForm = (props) => {
 				<input type="submit" value="Sign Up"/>
 			</form>
 			<Link to="/">Log In</Link>
+			{dir}
 		</div>
 	)
 }
